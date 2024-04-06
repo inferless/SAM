@@ -1,0 +1,6 @@
+build:
+  system_packages:
+    - "ffmpeg"
+  python_packages:
+    - "accelerate==0.28.0"
+    - "transformers==4.39.1"
