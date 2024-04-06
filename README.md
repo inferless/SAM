@@ -1,5 +1,5 @@
-# Distil-Whisper: distil-large-v3
-Distil-Whisper, as outlined in the paper "Robust Knowledge Distillation via Large-Scale Pseudo Labelling," represents the culmination of the Distil-Whisper English series. It's a refined version of OpenAI's Whisper large-v3, boasting superior long-form transcription accuracy with both sequential and chunked algorithms. This model performs within 1% WER of large-v3 on long-form audio tasks and surpasses distil-large-v2 by 4.8% using the sequential algorithm, all while being significantly faster.
+# Segment Anything Model (SAM)
+The Segment Anything Model (SAM) produces high quality object masks from input prompts such as points or boxes, and it can be used to generate masks for all objects in an image. It has been trained on a dataset of 11 million images and 1.1 billion masks, and has strong zero-shot performance on a variety of segmentation tasks.
 
 ---
 ## Prerequisites
