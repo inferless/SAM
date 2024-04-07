@@ -46,8 +46,6 @@ class InferlessPythonModel:
       return img_str.decode('utf-8')
 
   def infer(self,inputs):
-      # "https://huggingface.co/ybelkada/segment-anything/resolve/main/assets/car.png"
-      # [450, 600]
       input_points = [[inputs["input_points"]]]
       img_url = inputs["image_url"]
       raw_image = Image.open(requests.get(img_url, stream=True).raw).convert("RGB")
