@@ -49,7 +49,7 @@ curl --location 'http://localhost:8000/v2/models/SAM/infer' \
     {
       "name": "input_points",
       "shape": [2],
-      "data": [[450, 600]],
+      "data": [[1740,748]],
       "datatype": "FP32"
     }
   ]
