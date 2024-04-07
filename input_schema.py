@@ -6,7 +6,7 @@ INPUT_SCHEMA = {
         'example': ["https://huggingface.co/ybelkada/segment-anything/resolve/main/assets/car.png"]
     },
     "input_points": {
-        'datatype': 'INT',  # Assuming coordinates are integers
+        'datatype': 'FP32',  # Assuming coordinates are integers
         'required': True,
         'shape': [2],  # Specifies that exactly two integers are expected
         'example': [[450, 600]]  # Provides an example as a nested list, consistent with your shape requirement
