@@ -1,19 +1,10 @@
-import torch
-from transformers import SamModel, SamProcessor
-from PIL import Image
-import requests
-import torch
-import numpy as np
-import matplotlib.pyplot as plt
-from PIL import Image
-
 class InferlessPythonModel:
   def initialize(self):
       self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
       self.model = SamModel.from_pretrained("facebook/sam-vit-huge").to(self.device)
       self.processor = SamProcessor.from_pretrained("facebook/sam-vit-huge")
-    
-  def process_image(self,masks):
+
+  def process_image(self,masks,raw_image):
       mask = masks[0].squeeze()
       mask = mask[0].cpu().detach()
 
@@ -22,11 +13,12 @@ class InferlessPythonModel:
           mask_normalized = mask / max_value
       else:
          mask_normalized = torch.zeros(mask.size())
-        
+
       # Convert mask_normalized to a numpy array if it's not already
       mask_normalized_np = mask_normalized.cpu().detach().numpy()
       color = np.array([30, 144, 255])  # RGB color for the mask
       opacity = 0.6  # Opacity of the mask
+      image_array = np.array(raw_image)
       image_array_normalized = image_array / 255.0
       mask_rgb = np.zeros((*mask_normalized_np.shape, 3), dtype=np.float32)
       for i in range(3):  # Apply the color to the mask
@@ -42,7 +34,7 @@ class InferlessPythonModel:
       img_str = base64.b64encode(buff.getvalue())
       base64_string = img_str.decode('utf-8')
       return img_str.decode('utf-8')
-      
+
   def infer(self,inputs):
       # "https://huggingface.co/ybelkada/segment-anything/resolve/main/assets/car.png"
       # [450, 600]
@@ -55,15 +47,14 @@ class InferlessPythonModel:
 
       inputs.pop("pixel_values", None)
       inputs.update({"image_embeddings": image_embeddings})
-    
+
       with torch.no_grad():
           outputs = self.model(**inputs)
-    
+
       masks = self.processor.image_processor.post_process_masks(outputs.pred_masks.cpu(), inputs["original_sizes"].cpu(), inputs["reshaped_input_sizes"].cpu())
-      image_data = self.process_image(masks)
+      image_data = self.process_image(masks,raw_image)
       return {"generated_image_base64": image_data}
-      
-    
+
+
   def finalize(self,args):
       pass
-    
