@@ -36,24 +36,25 @@ The following is a sample Input and Output JSON for this model which you can use
 ## Curl Command
 Following is an example of the curl command you can use to make inference. You can find the exact curl command in the Model's API page in Inferless.
 ```bash
-curl --location '<your_inference_url>' \
-          --header 'Content-Type: application/json' \
-          --header 'Authorization: Bearer <your_api_key>' \
-          --data '{
-                "inputs": [
-                    {
-                    "data": [
-                        "http://thepodcastexchange.ca/s/Porsche-Macan-July-5-2018-1.mp3"
-                    ],
-                    "name": "audio_url",
-                    "shape": [
-                        1
-                    ],
-                    "datatype": "BYTES"
-                    }
-                ]
-                }
-            '
+curl --location 'http://localhost:8000/v2/models/SAM/infer' \
+--header 'Content-Type: application/json' \
+--data '{
+  "inputs": [
+    {
+      "name": "image_url",
+      "shape": [1],
+      "data": ["https://huggingface.co/ybelkada/segment-anything/resolve/main/assets/car.png"],
+      "datatype": "BYTES"
+    },
+    {
+      "name": "input_points",
+      "shape": [2],
+      "data": [[450, 600]],
+      "datatype": "FP32"
+    }
+  ]
+}'
+
 ```
 
 
