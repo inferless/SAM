@@ -21,10 +21,6 @@ Get started by forking the repository. You can do this by clicking on the fork b
 
 This will create a copy of the repository in your own GitHub account, allowing you to make changes and customize it according to your needs.
 
-### Add Your Hugging Face Auth Token
-Go into the `app.py` and replace `<your_token>` with your hugging face api key. This token will be used to download weights from hugging face if you're using Llama-2. Make sure to check the repo is private to protect your hugging face key.
-
-
 ### Import the Model in Inferless
 Log in to your inferless account, select the workspace you want the model to be imported into and click the Add Model button.
 
