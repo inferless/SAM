@@ -1,3 +1,13 @@
+import torch
+from transformers import SamModel, SamProcessor
+from PIL import Image
+import requests
+import torch
+import numpy as np
+from PIL import Image
+import base64
+from io import BytesIO
+
 class InferlessPythonModel:
   def initialize(self):
       self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
